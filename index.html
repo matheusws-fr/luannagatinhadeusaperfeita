@@ -1,0 +1,354 @@
+<!-- ======================================================= -->
+<!-- ARQUIVO: index.html (A Página Principal com seu texto!)   -->
+<!-- Contém HTML, CSS e JavaScript organizados.              -->
+<!-- ======================================================= -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i love u shawty girl &lt;3</title>
+
+    <!-- ===== ÍCONE DO SITE (FAVICON) (ATUALIZADO) ===== -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Importando fontes para deixar o site mais elegante -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- ======================================================= -->
+    <!-- CSS (O Estilo e a Beleza da Página)                     -->
+    <!-- ======================================================= -->
+    <style>
+        :root {
+            --primary-color: #e94560;
+            --text-color: #f0f0f0;
+            --font-title: 'Dancing Script', cursive;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            font-family: var(--font-body);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* ===== TELA DE CLIQUE INICIAL (COM TRANSIÇÃO SUAVE) ===== */
+        #click-gate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            cursor: pointer;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+
+        .heart-icon {
+            font-size: 100px;
+            color: var(--primary-color);
+            animation: pulse 1.5s infinite;
+        }
+
+        .click-text {
+            margin-top: 20px;
+            color: #555;
+            font-size: 1.2em;
+            letter-spacing: 2px;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        /* ========================================= */
+
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #FFFFFF; 
+            display: none; /* Começa escondido */
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.75s ease, visibility 0.75s ease;
+        }
+        
+        .preloader-content { text-align: center; }
+        .preloader-content img { max-width: 200px; }
+
+        .loading-text {
+            margin-top: 15px; color: #888; font-family: var(--font-body);
+            font-size: 1.2em; letter-spacing: 3px; text-transform: lowercase;
+            animation: blink 1.5s infinite ease-in-out;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .container {
+            background: #000000;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 0 25px rgba(233, 69, 96, 0.3);
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid var(--primary-color);
+            position: relative;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .container.loaded { visibility: visible; opacity: 1; }
+
+        .sparkle-container {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .body-sparkles {
+             position: fixed; z-index: -1;
+             overflow: hidden;
+        }
+
+        .sparkle {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+        
+        .corner-gif {
+            position: absolute;
+            width: 80px; height: auto;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .corner-gif.top-left { top: 5px; left: 5px; }
+        .corner-gif.bottom-right { bottom: 5px; right: 5px; }
+
+        .section, footer {
+            position: relative;
+            z-index: 1;
+        }
+
+        .declaration-text, .transition-text {
+            background: rgba(0,0,0,0.2);
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .section { margin-bottom: 40px; }
+        .declaration-text {
+            font-size: 1.1em; line-height: 1.7; text-align: left;
+            margin-top: -10px; margin-bottom: 40px; color: #ddd;
+        }
+        .transition-text {
+            font-size: 1.1em; font-style: italic; color: #ccc; margin-bottom: 40px;
+        }
+        .question-box {
+            background: linear-gradient(145deg, var(--primary-color), #c93049);
+            color: white; padding: 30px; border-radius: 15px; margin-top: 20px;
+            box-shadow: 0 8px 25px rgba(233, 69, 96, 0.3);
+        }
+        .question-box h2 {
+            font-family: var(--font-title); font-size: 2.8em; color: white; margin: 0;
+        }
+
+        .buttons { 
+            margin-top: 30px; 
+            padding-bottom: 10px;
+            min-height: 60px;
+            z-index: 10;
+        }
+        .btn {
+            text-decoration: none; color: white; padding: 15px 35px; border-radius: 50px;
+            font-weight: 600; font-size: 1.1em; border: none; cursor: pointer;
+            transition: all 0.3s ease; margin: 0 10px; text-transform: uppercase;
+        }
+        .btn-yes {
+            background-color: #28a745; box-shadow: 0 4px 20px rgba(40, 167, 69, 0.4);
+        }
+        .btn-yes:hover { background-color: #218838; transform: translateY(-3px); }
+        .btn-no {
+            background-color: #dc3545; box-shadow: 0 4px 20px rgba(220, 53, 69, 0.4);
+            /* A posição absoluta será relativa ao .container */
+        }
+        
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5em !important; }
+            .declaration-text, .transition-text { font-size: 1em; }
+            .container { padding: 30px 20px; }
+            .question-box h2 { font-size: 2em; }
+            .corner-gif { width: 60px; top: 2px; left: 2px; }
+            .corner-gif.bottom-right { bottom: 2px; right: 2px; }
+            .buttons { 
+                display: flex; 
+                flex-direction: column; 
+                align-items: center;
+                gap: 15px; 
+            }
+            .btn { width: 90%; }
+            .btn-no {
+                position: relative;
+                left: auto;
+                top: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="sparkle-container body-sparkles"></div>
+
+    <div id="click-gate">
+        <div class="heart-icon">❤️</div>
+        <p class="click-text">clique no coração aqui sua gostosa :3</p>
+    </div>
+
+    <div id="preloader">
+        <div class="preloader-content">
+            <img src="https://i.pinimg.com/originals/f8/46/bd/f846bd9b4e24d10c5415262af6fc8ef4.gif" alt="Carregando...">
+            <p class="loading-text">carregando...</p>
+        </div>
+    </div>
+    
+    <div class="container" id="main-container">
+
+        <div class="sparkle-container container-sparkles"></div>
+
+        <img src="https://cdn.discordapp.com/attachments/1301293470878666805/1382835419229454336/7V0.gif?ex=684c9957&is=684b47d7&hm=f2e5f4f55e76aadd0191113d0074c839ce158fae320400be724a2e6ff75c4f0f" class="corner-gif top-left" alt="decoração">
+        <img src="https://cdn.discordapp.com/attachments/1301293470878666805/1382835419229454336/7V0.gif?ex=684c9957&is=684b47d7&hm=f2e5f4f55e76aadd0191113d0074c839ce158fae320400be724a2e6ff75c4f0f" class="corner-gif bottom-right" alt="decoração">
+        
+        <section class="section">
+            <h1 style="font-family: var(--font-title); color: var(--primary-color); font-size: 3.5em; margin-bottom: 20px;">Luanna...</h1>
+            <p class="declaration-text">
+                Eu sinto que existe uma necessidade tremenda de eu expôr e te relatar os meus reais sentimentos por você. Talvez você pense "ah que bobeira que cara bobao, cara mal me conhece" mas eu acredito que o tempo seja totalmente relativo, ainda mais quando se refere a você ter percepção do que sente por alguém. Eu te digo isso por experiência própria, porque você pode ter convivido o tempo que for com a pessoa, talvez acreditando que pelo fato de estarem tanto tempo próximos, você tenha na mente a ilusão de que conhece aquela pessoa verdadeiramente e por algum acaso, acabe caine em uma armadilha e perdendo alguém que você achava que era seu amigo. O que eu quero dizer com isso é que, tempo não é o que primordialmente define a veracidade do seu amor por alguém, e sim a profundidade e a qualidade desse sentimento. E com isso eu posso te dizer com toda a certeza, o meu amor por você é totalmente autêntico, genuíno e verdadeiro. Você é uma garota incrível e eu me sinto o homem mais feliz do mundo por ter conhecido uma garota tão especial como você, eu te amo.
+            </p>
+        </section>
+
+        <section class="section">
+            <p class="transition-text">
+                eu quero que você seja minha todinha minha e sei que vc merece o mundo inteirinho só pra vc, irei cuidar de ti com todo o amor e carinho que eu puder te oferecer, então... aqui vai a perguntinha que eu queria te fazer já faz um tempinho :P
+            </p>
+        </section>
+        
+        <section class="section">
+            <div class="question-box">
+                <h2>...aceita namorar comigo?</h2>
+            </div>
+        </section>
+
+        <footer class="buttons">
+            <a href="sim.html" class="btn btn-yes">Sim!</a>
+            <button id="noButton" class="btn btn-no">Não</button>
+        </footer>
+
+    </div>
+
+    <script>
+        function createSparkles(containerSelector, numSparkles = 50, sizeFactor = 2) {
+            const container = document.querySelector(containerSelector);
+            if (!container) return;
+            
+            for (let i = 0; i < numSparkles; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                const size = Math.random() * sizeFactor + 1;
+                sparkle.style.width = `${size}px`;
+                sparkle.style.height = `${size}px`;
+                sparkle.style.top = `${Math.random() * 100}%`;
+                sparkle.style.left = `${Math.random() * 100}%`;
+                sparkle.style.animationDelay = `${Math.random() * 5}s`;
+                sparkle.style.animationDuration = `${Math.random() * 5 + 5}s`;
+                container.appendChild(sparkle);
+            }
+        }
+    
+        const clickGate = document.getElementById('click-gate');
+        clickGate.addEventListener('click', () => {
+            const preloader = document.getElementById('preloader');
+            preloader.style.display = 'flex';
+
+            clickGate.style.opacity = '0';
+            clickGate.style.visibility = 'hidden';
+            
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+                document.getElementById('main-container').classList.add('loaded');
+            }, 3000); 
+        }, { once: true });
+
+        window.addEventListener('load', () => {
+            createSparkles('.body-sparkles', 100);
+            createSparkles('.container-sparkles', 50);
+        });
+
+        const noButton = document.getElementById('noButton');
+        const mainContainer = document.getElementById('main-container');
+
+        function moveButton() {
+            if (window.innerWidth <= 600) {
+                return;
+            }
+            
+            // ***** CORREÇÃO DEFINITIVA DO BOTÃO FUJÃO *****
+            // Gera posições percentuais aleatórias dentro do container
+            // Uma margem de 15% nas bordas para o botão não ficar colado
+            const newTop = Math.random() * 85; // 0% a 85%
+            const newLeft = Math.random() * 85; // 0% a 85%
+            
+            noButton.style.position = 'absolute';
+            noButton.style.top = `${newTop}%`;
+            noButton.style.left = `${newLeft}%`;
+        }
+
+        noButton.addEventListener('mouseover', moveButton);
+        noButton.addEventListener('click', moveButton);
+
+        window.addEventListener('resize', () => {
+             if (window.innerWidth <= 600) {
+                noButton.style.position = 'relative';
+                noButton.style.left = 'auto';
+                noButton.style.top = 'auto';
+             }
+        });
+    </script>
+</body>
+</html>

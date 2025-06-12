@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGORA É OFICIAL!</title>
+    
+    <!-- ===== ÍCONE DO SITE (FAVICON) ===== -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Importando fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&family=Montserrat:wght@400;700&family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #e94560;
+            --secondary-color: #28a745;
+            --text-color-dark: #333;
+            --font-special: 'Nunito', sans-serif;
+            --font-body: 'Montserrat', sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: var(--font-body);
+            /* ***** CORREÇÃO: Removido 'overflow: hidden' para permitir o scroll ***** */
+            /* ===== BACKGROUND ANIMADO (NOVO) ===== */
+            background-color: #c81d25; /* Vermelho intenso de base */
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            z-index: -1;
+            /* ***** ANIMAÇÃO DE CORAÇÕES (ATUALIZADO) ***** */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><text y="20" font-size="14">❤️</text><text x="50" y="25" font-size="10">💖</text><text x="80" y="40" font-size="12">💕</text><text x="10" y="60" font-size="8">❤️</text><text x="60" y="75" font-size="16">💖</text><text x="25" y="90" font-size="11">💕</text></svg>');
+            animation: moveBackground 15s linear infinite;
+        }
+        
+        @keyframes moveBackground {
+            from { background-position: 0 0; }
+            to { background-position: -200px -200px; }
+        }
+
+        .container-sim {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 25px;
+            border: 2px solid white;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25), 0 0 0 5px rgba(255,255,255,0.2);
+            color: var(--text-color-dark);
+            text-align: center;
+            max-width: 650px;
+            width: 100%;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .container-sim h1 {
+            font-family: var(--font-special);
+            font-weight: 900;
+            font-size: 3.2em;
+            color: var(--text-color-dark);
+            margin-bottom: 20px;
+        }
+
+        .celebration-gif {
+            max-width: 250px;
+            width: 100%;
+            height: auto;
+            margin: 10px auto 20px auto;
+            border-radius: 15px;
+        }
+
+        .chronometer {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .time-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .time-value {
+            font-family: var(--font-mono);
+            font-size: 3em;
+            color: var(--text-color-dark);
+            background-color: #fff;
+            padding: 10px 15px;
+            border-radius: 10px;
+            min-width: 70px;
+        }
+
+        .time-label {
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #6c757d;
+            text-transform: uppercase;
+        }
+
+        .love-message {
+            font-size: 1.2em;
+            margin-top: 25px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 600px) {
+            .container-sim { padding: 30px 20px; }
+            .container-sim h1 { font-size: 2.5em; }
+            .celebration-gif { max-width: 200px; }
+            .timer { gap: 10px; }
+            .time-value { font-size: 1.8em; min-width: 45px; padding: 8px 10px;}
+            .time-label { font-size: 0.7em; }
+            .love-message { font-size: 1.1em; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container-sim">
+        <h1>Agora estamos oficialmente casados rsrs 😼😼😼</h1>
+
+        <img src="https://i.pinimg.com/originals/da/f3/a4/daf3a4c4ec06aea34548831c80421207.gif" alt="Kuromi e My Melody" class="celebration-gif">
+        
+        <div class="chronometer">
+            <div class="timer" id="timer">
+                <div class="time-unit">
+                    <div id="days" class="time-value">0</div>
+                    <div class="time-label">Dias</div>
+                </div>
+                <div class="time-unit">
+                    <div id="hours" class="time-value">0</div>
+                    <div class="time-label">Horas</div>
+                </div>
+                <div class="time-unit">
+                    <div id="minutes" class="time-value">0</div>
+                    <div class="time-label">Minutos</div>
+                </div>
+                <div class="time-unit">
+                    <div id="seconds" class="time-value">0</div>
+                    <div class="time-label">Segundos</div>
+                </div>
+            </div>
+        </div>
+
+        <p class="love-message">contando cada segundo com vc! te amo muito meu amor &lt;3</p>
+    </div>
+
+    <script>
+        const startTime = Date.now();
+
+        function updateTimer() {
+            const now = Date.now();
+            const elapsedTime = now - startTime;
+
+            const totalSeconds = Math.floor(elapsedTime / 1000);
+            const days = Math.floor(totalSeconds / 86400);
+            const hours = Math.floor((totalSeconds % 86400) / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+
+            const formatTime = (time) => time.toString().padStart(2, '0');
+
+            document.getElementById('days').innerText = formatTime(days);
+            document.getElementById('hours').innerText = formatTime(hours);
+            document.getElementById('minutes').innerText = formatTime(minutes);
+            document.getElementById('seconds').innerText = formatTime(seconds);
+        }
+        
+        window.onload = () => {
+            setInterval(updateTimer, 1000);
+        };
+    </script>
+</body>
+</html>
